@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- Skripta za inicijalizaciju teme i jezika -->
+    <script>
+      (function() {
+        // Dohvaćanje teme iz lokalnog spremnika
+        const storedTheme = localStorage.getItem('theme');
+        const theme = storedTheme ? storedTheme : 'light';
+        
+        // Dohvati jezik iz lokalnog spremnika
+        const storedLang = localStorage.getItem('language');
+        const lang = storedLang ? storedLang : 'hr';
+        
+        // Postavi jezik
+        document.documentElement.lang = lang;
+        
+        // Postavi temu
+        document.documentElement.classList.remove('light', 'dark');
+        if (theme === 'system') {
+          const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.classList.add(systemDark ? 'dark' : 'light');
+        } else {
+          document.documentElement.classList.add(theme);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+    <!-- This is a replit script which adds a banner on the top of the page when opened in development mode outside the replit environment -->
+    <script type="text/javascript" src="https://replit.com/public/js/replit-dev-banner.js"></script>
+  </body>
+</html>
